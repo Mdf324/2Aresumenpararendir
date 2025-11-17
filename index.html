@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material de Estudio - Educación Tecnológica</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --accent: #e74c3c;
+            --light: #f9f9f9;
+            --dark: #2c3e50;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 0;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 10px;
+        }
+        
+        .tab-btn {
+            background-color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            color: var(--dark);
+        }
+        
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .content-section {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .card {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .card h4 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        ul, ol {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .exercise {
+            background-color: #e8f4fc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .exercise h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        .answer {
+            display: none;
+            background-color: #f0f9f0;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .toggle-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: var(--dark);
+            color: white;
+            margin-top: 2rem;
+        }
+        
+        .highlight {
+            background-color: #fff9c4;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        .revolucion-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-top: 5px solid;
+            transition: transform 0.3s ease;
+        }
+        
+        .revolucion-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .rev-1 { border-top-color: #e74c3c; }
+        .rev-2 { border-top-color: #3498db; }
+        .rev-3 { border-top-color: #2ecc71; }
+        .rev-4 { border-top-color: #9b59b6; }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            width: 50%;
+            padding: 0 2rem;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 0;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 10px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Educación Tecnológica</h1>
+        <p>Material de estudio interactivo para preparar tus exámenes</p>
+    </header>
+    
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="tab-btn active" data-target="intro">Introducción</button>
+            <button class="tab-btn" data-target="primer-examen">Primer Examen</button>
+            <button class="tab-btn" data-target="segundo-examen">Segundo Examen</button>
+            <button class="tab-btn" data-target="ejercicios">Ejercicios Prácticos</button>
+        </div>
+        
+        <section id="intro" class="content-section active">
+            <h2>Bienvenidos al Material de Estudio</h2>
+            <p>Este recurso está diseñado para ayudarte a preparar los exámenes de Educación Tecnológica. Aquí encontrarás:</p>
+            <ul>
+                <li>Resúmenes de los temas principales</li>
+                <li>Explicaciones claras y concisas</li>
+                <li>Ejercicios prácticos para reforzar el aprendizaje</li>
+                <li>Respuestas modelo para verificar tus conocimientos</li>
+            </ul>
+            
+            <div class="card">
+                <h4>¿Cómo usar este material?</h4>
+                <p>Navega por las diferentes pestañas para acceder a los contenidos específicos de cada examen. En la sección de ejercicios podrás poner a prueba lo que has aprendido.</p>
+                <p>¡No dudes en repasar cada tema las veces que necesites!</p>
+            </div>
+        </section>
+        
+        <section id="primer-examen" class="content-section">
+            <h2>Temas del Primer Examen</h2>
+            
+            <div class="card">
+                <h4>1. Propiedades de los Materiales</h4>
+                <p>Son las características que definen el comportamiento de los materiales frente a diferentes estímulos:</p>
+                <ul>
+                    <li><strong>Mecánicas:</strong> Resistencia, dureza, elasticidad</li>
+                    <li><strong>Térmicas:</strong> Conductividad, dilatación</li>
+                    <li><strong>Eléctricas:</strong> Conductividad, resistividad</li>
+                    <li><strong>Magnéticas:</strong> Permeabilidad, retentividad</li>
+                    <li><strong>Ópticas:</strong> Transparencia, reflectividad</li>
+                    <li><strong>Químicas:</strong> Oxidación, corrosión</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>2. Clasificación de Materiales según su Origen</h4>
+                <ul>
+                    <li><strong>Naturales:</strong> Se obtienen directamente de la naturaleza (madera, algodón, mármol)</li>
+                    <li><strong>Artificiales:</strong> Se transforman a partir de materiales naturales (papel, plástico, vidrio)</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>3. Revoluciones Tecnológicas</h4>
+                <p>Las cuatro grandes revoluciones tecnológicas que transformaron la sociedad:</p>
+            </div>
+            
+            <!-- Línea de tiempo de revoluciones tecnológicas -->
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Primera Revolución Industrial (Siglo XVIII)</h4>
+                        <p><strong>Características principales:</strong></p>
+                        <ul>
+                            <li>Mecanización de procesos con la máquina de vapor</li>
+                            <li>Paso de la producción artesanal a la industrial</li>
+                            <li>Uso del carbón como principal fuente de energía</li>
+                        </ul>
+                        <p><strong>Materias primas:</strong> Carbón, hierro, acero</p>
+                        <p><strong>Inventos destacados:</strong> Máquina de vapor (James Watt), telar mecánico, ferrocarril</p>
+                        <p><strong>Impacto social:</strong> Surgimiento de las fábricas, migración del campo a la ciudad, creación del proletariado industrial</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Segunda Revolución Industrial (Siglo XIX)</h4>
+                        <p><strong>Características principales:</strong></p>
+                        <ul>
+                            <li>Producción en masa con electricidad y línea de montaje</li>
+                            <li>Desarrollo de nuevas fuentes de energía</li>
+                            <li>Expansión de las comunicaciones y el transporte</li>
+                        </ul>
+                        <p><strong>Materias primas:</strong> Petróleo, acero, aluminio</p>
+                        <p><strong>Inventos destacados:</strong> Motor de combustión interna, teléfono, bombilla eléctrica, línea de montaje (Henry Ford)</p>
+                        <p><strong>Impacto social:</strong> Sociedad de consumo, crecimiento de las ciudades, mejoras en la calidad de vida</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Tercera Revolución Industrial (Siglo XX)</h4>
+                        <p><strong>Características principales:</strong></p>
+                        <ul>
+                            <li>Automatización con electrónica, computación y robotización</li>
+                            <li>Desarrollo de las tecnologías de la información</li>
+                            <li>Globalización de la economía</li>
+                        </ul>
+                        <p><strong>Materias primas:</strong> Silicio, plásticos, nuevos materiales compuestos</p>
+                        <p><strong>Inventos destacados:</strong> Computadora personal, internet, robots industriales, telecomunicaciones satelitales</p>
+                        <p><strong>Impacto social:</strong> Sociedad de la información, teletrabajo, acceso instantáneo al conocimiento</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Cuarta Revolución Industrial (Siglo XXI)</h4>
+                        <p><strong>Características principales:</strong></p>
+                        <ul>
+                            <li>Fusión de tecnologías físicas, digitales y biológicas</li>
+                            <li>Internet de las cosas (IoT) e inteligencia artificial</li>
+                            <li>Personalización masiva y producción bajo demanda</li>
+                        </ul>
+                        <p><strong>Materias primas:</strong> Grafeno, materiales inteligentes, bioplásticos</p>
+                        <p><strong>Inventos destacados:</strong> Vehículos autónomos, impresión 3D, realidad aumentada, blockchain, biotecnología avanzada</p>
+                        <p><strong>Impacto social:</strong> Transformación digital en todos los aspectos de la vida, nuevos modelos de negocio, cambios en el mercado laboral</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h4>4. Cultura Tecnológica</h4>
+                <p>Conjunto de conocimientos, habilidades, valores y herramientas que un pueblo desarrolla para resolver problemas y satisfacer necesidades.</p>
+            </div>
+            
+            <div class="card">
+                <h4>5. Bienes y Productos Tecnológicos</h4>
+                <p><strong>Bien:</strong> Objeto que satisface una necesidad humana.</p>
+                <p><strong>Productos de seguridad:</strong> Alarma, chaleco reflectante, casco, cámara de seguridad, candado.</p>
+            </div>
+            
+            <div class="card">
+                <h4>6. Técnica</h4>
+                <p>Procedimiento para realizar una actividad de manera eficaz.</p>
+                <p><strong>Etimología:</strong> Del griego "tekhnē" (arte u oficio).</p>
+            </div>
+        </section>
+        
+        <section id="segundo-examen" class="content-section">
+            <h2>Temas del Segundo Examen</h2>
+            
+            <div class="card">
+                <h4>1. Concepto de Energía</h4>
+                <p>Capacidad de realizar un trabajo o producir un cambio. Se transforma pero no se crea ni destruye (Ley de Conservación).</p>
+            </div>
+            
+            <div class="card">
+                <h4>2. Energía Primaria y Secundaria</h4>
+                <ul>
+                    <li><strong>Primaria:</strong> Se obtiene directamente de la naturaleza (petróleo crudo, carbón, viento, sol)</li>
+                    <li><strong>Secundaria:</strong> Resulta de transformar energía primaria (electricidad, nafta, gasoil)</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>3. Regiones Eléctricas de Argentina</h4>
+                <p>Las ocho regiones generadoras de energía eléctrica en Argentina son:</p>
+                <ol>
+                    <li>Noroeste (NOA)</li>
+                    <li>Nordeste (NEA)</li>
+                    <li>Centro</li>
+                    <li>Cuyo</li>
+                    <li>Comahue</li>
+                    <li>Patagonia</li>
+                    <li>Buenos Aires</li>
+                    <li>Litoral</li>
+                </ol>
+            </div>
+            
+            <div class="card">
+                <h4>4. Fuentes de Energía en Argentina</h4>
+                <p>Los cinco tipos principales que se producen en Argentina:</p>
+                <ul>
+                    <li><strong>Hidráulica:</strong> Aprovecha la energía del agua en represas (Yacyretá)</li>
+                    <li><strong>Térmica:</strong> Quema combustibles fósiles (gas, carbón, petróleo)</li>
+                    <li><strong>Nuclear:</strong> Utiliza uranio en centrales nucleares (Atucha)</li>
+                    <li><strong>Eólica:</strong> Aprovecha la fuerza del viento con aerogeneradores</li>
+                    <li><strong>Solar:</strong> Capta energía del sol mediante paneles fotovoltaicos</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>5. Análisis Energético de Artefactos</h4>
+                <p>Para cada artefacto debemos identificar:</p>
+                <ul>
+                    <li><strong>Energía que ingresa:</strong> La fuente inicial de energía</li>
+                    <li><strong>Energía útil:</strong> La función principal que realiza</li>
+                    <li><strong>Energía residual:</strong> Energía que se pierde o no se aprovecha</li>
+                </ul>
+                <p><strong>Ejemplo - Encendedor:</strong></p>
+                <ul>
+                    <li>Entrada: Química (gas) + Mecánica (acción)</li>
+                    <li>Útil: Térmica/Lumínica (llama)</li>
+                    <li>Residual: Sonora (clic) + Térmica (calor disipado)</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="ejercicios" class="content-section">
+            <h2>Ejercicios Prácticos</h2>
+            
+            <div class="exercise">
+                <h4>Ejercicio 1: Identificación de Materiales</h4>
+                <p>Clasifica los siguientes materiales según su origen (natural o artificial):</p>
+                <ul>
+                    <li>Madera</li>
+                    <li>Plástico</li>
+                    <li>Vidrio</li>
+                    <li>Algodón</li>
+                    <li>Papel</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('respuesta1')">Ver Respuesta</button>
+                <div id="respuesta1" class="answer">
+                    <p><strong>Respuesta:</strong></p>
+                    <ul>
+                        <li>Madera: <span class="highlight">Natural</span></li>
+                        <li>Plástico: <span class="highlight">Artificial</span></li>
+                        <li>Vidrio: <span class="highlight">Artificial</span></li>
+                        <li>Algodón: <span class="highlight">Natural</span></li>
+                        <li>Papel: <span class="highlight">Artificial</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h4>Ejercicio 2: Tipos de Energía</h4>
+                <p>Identifica si las siguientes fuentes son energía primaria (P) o secundaria (S):</p>
+                <ul>
+                    <li>Electricidad</li>
+                    <li>Petróleo crudo</li>
+                    <li>Gas natural</li>
+                    <li>Nafta</li>
+                    <li>Energía eólica</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('respuesta2')">Ver Respuesta</button>
+                <div id="respuesta2" class="answer">
+                    <p><strong>Respuesta:</strong></p>
+                    <ul>
+                        <li>Electricidad: <span class="highlight">Secundaria (S)</span></li>
+                        <li>Petróleo crudo: <span class="highlight">Primaria (P)</span></li>
+                        <li>Gas natural: <span class="highlight">Primaria (P)</span></li>
+                        <li>Nafta: <span class="highlight">Secundaria (S)</span></li>
+                        <li>Energía eólica: <span class="highlight">Primaria (P)</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h4>Ejercicio 3: Análisis Energético</h4>
+                <p>Completa el análisis energético para una <strong>hornalla de cocina a gas</strong>:</p>
+                <ul>
+                    <li>Energía que ingresa: __________</li>
+                    <li>Energía útil: __________</li>
+                    <li>Energía residual: __________</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('respuesta3')">Ver Respuesta</button>
+                <div id="respuesta3" class="answer">
+                    <p><strong>Respuesta:</strong></p>
+                    <ul>
+                        <li>Energía que ingresa: <span class="highlight">Química (del gas)</span></li>
+                        <li>Energía útil: <span class="highlight">Térmica (calor para cocinar)</span></li>
+                        <li>Energía residual: <span class="highlight">Térmica (calor que calienta el aire) + Lumínica (llama visible)</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h4>Ejercicio 4: Revoluciones Tecnológicas</h4>
+                <p>Relaciona cada revolución con su característica principal:</p>
+                <ol>
+                    <li>Primera Revolución Industrial</li>
+                    <li>Segunda Revolución Industrial</li>
+                    <li>Tercera Revolución Industrial</li>
+                    <li>Cuarta Revolución Industrial</li>
+                </ol>
+                <p>Características:</p>
+                <ul>
+                    <li>A) Fusión de tecnologías con IoT e inteligencia artificial</li>
+                    <li>B) Mecanización con máquina de vapor</li>
+                    <li>C) Automatización con electrónica y computación</li>
+                    <li>D) Producción en masa con electricidad</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('respuesta4')">Ver Respuesta</button>
+                <div id="respuesta4" class="answer">
+                    <p><strong>Respuesta:</strong></p>
+                    <ul>
+                        <li>1 - <span class="highlight">B</span></li>
+                        <li>2 - <span class="highlight">D</span></li>
+                        <li>3 - <span class="highlight">C</span></li>
+                        <li>4 - <span class="highlight">A</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h4>Ejercicio 5: Revoluciones Tecnológicas - Completar</h4>
+                <p>Completa la siguiente tabla sobre las revoluciones tecnológicas:</p>
+                <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+                    <tr style="background-color: var(--primary); color: white;">
+                        <th style="padding: 10px; text-align: left;">Revolución</th>
+                        <th style="padding: 10px; text-align: left;">Siglo</th>
+                        <th style="padding: 10px; text-align: left;">Invento Principal</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px;">Primera</td>
+                        <td style="padding: 10px;">__________</td>
+                        <td style="padding: 10px;">__________</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px;">Segunda</td>
+                        <td style="padding: 10px;">__________</td>
+                        <td style="padding: 10px;">__________</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px;">Tercera</td>
+                        <td style="padding: 10px;">__________</td>
+                        <td style="padding: 10px;">__________</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px;">Cuarta</td>
+                        <td style="padding: 10px;">__________</td>
+                        <td style="padding: 10px;">__________</td>
+                    </tr>
+                </table>
+                <button class="toggle-btn" onclick="toggleAnswer('respuesta5')">Ver Respuesta</button>
+                <div id="respuesta5" class="answer">
+                    <p><strong>Respuesta:</strong></p>
+                    <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+                        <tr style="background-color: var(--primary); color: white;">
+                            <th style="padding: 10px; text-align: left;">Revolución</th>
+                            <th style="padding: 10px; text-align: left;">Siglo</th>
+                            <th style="padding: 10px; text-align: left;">Invento Principal</th>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 10px;">Primera</td>
+                            <td style="padding: 10px;"><span class="highlight">XVIII</span></td>
+                            <td style="padding: 10px;"><span class="highlight">Máquina de vapor</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 10px;">Segunda</td>
+                            <td style="padding: 10px;"><span class="highlight">XIX</span></td>
+                            <td style="padding: 10px;"><span class="highlight">Electricidad/Línea de montaje</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 10px;">Tercera</td>
+                            <td style="padding: 10px;"><span class="highlight">XX</span></td>
+                            <td style="padding: 10px;"><span class="highlight">Computadora/Internet</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 10px;">Cuarta</td>
+                            <td style="padding: 10px;"><span class="highlight">XXI</span></td>
+                            <td style="padding: 10px;"><span class="highlight">Inteligencia Artificial/IoT</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>Material de estudio - Educación Tecnológica - Colegio General Paz</p>
+        <p>¡Éxitos en tus exámenes!</p>
+    </footer>
+    
+    <script>
+        // Navegación por pestañas
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remover clase active de todos los botones y secciones
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+                
+                // Agregar clase active al botón clickeado
+                button.classList.add('active');
+                
+                // Mostrar la sección correspondiente
+                const targetId = button.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+        
+        // Función para mostrar/ocultar respuestas
+        function toggleAnswer(answerId) {
+            const answer = document.getElementById(answerId);
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+            } else {
+                answer.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
